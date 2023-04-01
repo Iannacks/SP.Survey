@@ -1,0 +1,11 @@
+opt_design<-function(condition,attribute.names,alt,set,block,seed,sign){
+  t<-99
+  p<-0
+  while(t>condition){
+  p<-p+1
+  design<-des_function(alt=alt,typology=0,attribute.names=attribute.names,set=set,block=block,seed=seed+p)
+  dom<-check_dominance(design=design,sign=sign,attribute.names=attribute.names)
+  t<-dom$dominance
+}
+return(list(design=design,dominance_level=dom$dominance,task_dominated=dom$task_dominated,seed=seed+p,iterations=p))
+}
